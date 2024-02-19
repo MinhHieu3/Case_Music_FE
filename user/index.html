@@ -10,6 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.5/axios.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
+    <script src="https://kit.fontawesome.com/44420478c7.js" crossorigin="anonymous"></script>
     <script src="../js/music.js"></script>
 
 
@@ -135,16 +136,13 @@
                                     src="https://cdn-icons-png.flaticon.com/512/3318/3318703.png"
                                     alt="back" id="prevSong"
                             />
-                            <img
-                                    src="play.jpg"
-                                    alt="pause"
-                                    class="pause" onclick="playMusic()" id="displayPlay"
-                            />
-                            <img
-                                    src="pause.jpg"
-                                    alt="pause"
-                                    class="pause" onclick="pause()" style="display: none" id="pauseMusic"
-                            />
+                            <i class="fa-regular fa-circle-play pause"
+
+                               onclick="playMusic()" id="displayPlay"></i>
+
+
+                            <i class="fa-regular fa-circle-pause pause"
+                               onclick="pause()" style="display: none" id="pauseMusic"></i>
                             <img
                                     src="https://cdn-icons-png.flaticon.com/512/4211/4211386.png"
                                     alt="forward"
@@ -285,5 +283,6 @@
 <script src="../js/main.js"></script>
 <script src="../js/login.js"></script>
 <script src="../js/profile.js"></script>
+
 </body>
 </html>

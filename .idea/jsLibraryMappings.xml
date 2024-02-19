@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{axios, firebase-app, firebase-storage}" />
+    <file url="PROJECT" libraries="{44420478c7}" />
   </component>
 </project>
