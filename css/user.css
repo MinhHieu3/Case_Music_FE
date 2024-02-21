@@ -313,9 +313,9 @@
 
 .function {
     display: flex;
-    align-items: start;
-    justify-content: start;
-    width: auto;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
     background-color: rgb(27, 27, 27);
 }
 
@@ -326,6 +326,7 @@
     align-items: center;
     margin-left: 0.5vh;
     background-color: transparent;
+
 }
 
 .function .music img {
@@ -370,19 +371,20 @@
     background-color: transparent;
     justify-content: center;
     transition: transform 0.3s ease;
+    margin-left: 5vh;
 }
 
-.love img {
+.love i {
     padding: 0;
     margin-right: 10px;
     margin-top: 18px;
     margin-left: 10vh;
-    width: 4vh;
-    height: 4vh;
+    font-size: 3vh;
     transition: transform 0.3s ease;
+    color: #20d762;
 }
 
-.love img:hover {
+.love i:hover {
     transform: scale(1.3);
 }
 
