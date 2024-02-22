@@ -6,6 +6,7 @@
  function profile() {
     var newBackground = document.getElementById("profiles");
     newBackground.style.display="block";
+
 }
  function backHome(){
     document.getElementById("profiles").style.display="none";

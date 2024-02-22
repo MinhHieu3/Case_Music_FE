@@ -59,10 +59,18 @@ axios.get('http://localhost:8080/api/songs').then(res => {
          const song = songs[index];
          toggleAudio(song.src,song.name,song.singer.name,song.album.avatar)
          updateLike(song.likes)
+         axios.get(`http://localhost:8080/api/songs/listen/${song.id}`
+         ).then(res=>{
+             console.log(res.data)
+
+         })
+
+
      }
     document.getElementById("nextSong").addEventListener("click", function() {
         if (songIndex >= 0 && songIndex < songs.length - 1) {
             playSong(songIndex + 1);
+
         }
     });
     document.getElementById("prevSong").addEventListener("click", function() {
@@ -80,6 +88,7 @@ axios.get('http://localhost:8080/api/songs').then(res => {
         `;
         songDiv.querySelector('.song-name').addEventListener('click', () =>{
             playSong(index)
+
             control.style.display='block';
             love.style.display='block';
             indexs=`${item.id}`;
@@ -89,7 +98,8 @@ axios.get('http://localhost:8080/api/songs').then(res => {
 
     });
     love.addEventListener('click', ()=>{
-        axios.get(`http://localhost:8080/api/songs/like/${indexs}`).then(res=>{
+        axios.get(`http://localhost:8080/api/songs/like/${indexs}`
+        ).then(res=>{
             updateLike(res.data.likes)
 
         })

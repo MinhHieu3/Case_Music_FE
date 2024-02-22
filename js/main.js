@@ -53,8 +53,13 @@ function seek(event) {
     let clickX = event.clientX - rect.left;
     let percentage = (clickX / totalWidth);
     let seekTime = percentage * audio.duration;
-
     audio.currentTime = seekTime;
+}
+function updateProgress() {
+    const currentTime = audio.currentTime;
+    const duration = audio.duration;
+    const percentage = (currentTime / duration) * 100;
+    progress.style.width = percentage + '%';
 }
 
 audio.addEventListener("timeupdate", function () {
@@ -69,6 +74,7 @@ audio.addEventListener("timeupdate", function () {
     if (!isNaN(totalMinutes) && !isNaN(totalSeconds)) {
         totalTime.style.display = 'block';
         totalTime.textContent = totalMinutes + ":" + (totalSeconds < 10 ? "0" : "") + totalSeconds;
+        updateProgress()
     } else {
         totalTime.style.display = 'none';
     }
