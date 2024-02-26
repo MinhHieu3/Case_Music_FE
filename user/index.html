@@ -6,12 +6,23 @@
     <meta name="viewport" content="width=device-width"/>
     <link rel="stylesheet" href="../css/user.css"/>
     <link rel="stylesheet" href="../css/login.css"/>
-    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/profile.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+            crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.5/axios.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
     <script src="https://kit.fontawesome.com/44420478c7.js" crossorigin="anonymous"></script>
-    <script src="../js/music.js"></script>
+
+
 </head>
 <body>
 <!--<input type="file" onchange="getImageData(event)">-->
@@ -170,34 +181,44 @@
             </div>
         </div>
         <div class="App__main-view">
-            <div class="App__top-gradient"></div>
-            <div class="App__header-placeholder"></div>
-            <section class="App__section App__quick-links">
-                <h1>Good afternoon</h1>
-                <div class="App__quick-links-container">
-                    <div class="App__quick-link">
-                        <div class="App__quick-link-featured-img">♥</div>
-                        <span>Liked Songs</span>
+            <div id="back-user">
+                <div class="App__top-gradient"></div>
+                <div class="App__header-placeholder"></div>
+                <section class="App__section App__quick-links">
+                    <h1>Good afternoon</h1>
+                    <div class="App__quick-links-container">
+                        <div class="App__quick-link">
+                            <div class="App__quick-link-featured-img">♥</div>
+                            <span>Liked Songs</span>
+                        </div>
+                        <div class="App__quick-link">
+                            <div class="App__quick-link-featured-img"></div>
+                            <span>Daily Mix 1</span>
+                        </div>
                     </div>
-                    <div class="App__quick-link">
-                        <div class="App__quick-link-featured-img"></div>
-                        <span>Daily Mix 1</span>
+                </section>
+                <section class="App__section App__your-shows">
+                    <div class="App__section-header">
+                        <h3>Top 10 trending</h3>
+                        <span>SEE ALL</span>
+                    </div>
+                    <div class="App__section-grid-container" id="card"></div>
+                </section>
+                <section class="App__section App__your-shows">
+                    <div class="App__section-header">
+                        <h3>Your top mixes</h3>
+                        <span>SEE ALL</span>
+                    </div>
+                </section>
+            </div>
+            <div class="admin-background">
+                <h1 style="margin-top: -94px;color: white;display: flex;position: fixed">List User</h1>
+                <div>
+                    <div class="list-user" id="user-table" style="margin-top: 127px ">
+
                     </div>
                 </div>
-            </section>
-            <section class="App__section App__your-shows">
-                <div class="App__section-header">
-                    <h3>Top 10 trending</h3>
-                    <span>SEE ALL</span>
-                </div>
-                <div class="App__section-grid-container" id="card"></div>
-            </section>
-            <section class="App__section App__your-shows">
-                <div class="App__section-header">
-                    <h3>Your top mixes</h3>
-                    <span>SEE ALL</span>
-                </div>
-            </section>
+            </div>
         </div>
     </div>
 </div>
@@ -273,13 +294,15 @@
         </form>
     </div>
 </div>
-<!--Giao diện Admin Viêt ở đây -->
-<div class="admin-backround">
-
-</div>
+<!--Giao diện Admin Viêt ở đây-->
+<!--<div class="admin-background">-->
+<!--    <h1>List User</h1>-->
+<!--    <div class="list-user" id="list-user"></div>-->
+<!--</div>-->
 <script src="../js/main.js"></script>
 <script src="../js/login.js"></script>
 <script src="../js/profile.js"></script>
-
+<script src="../js/music.js"></script>
+<script src="../js/admin.js"></script>
 </body>
 </html>
