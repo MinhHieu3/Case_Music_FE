@@ -11,7 +11,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
     <script src="https://kit.fontawesome.com/44420478c7.js" crossorigin="anonymous"></script>
-    <script src="../js/music.js"></script>
+
 
 
 </head>
@@ -34,6 +34,9 @@
                 </button>
                 <button class="App__user" id="myButton">
                     <span class="App__username">Đăng Xuất</span>
+                </button>
+                <button class="App__user" onclick="showListUser()">
+                    <span class="App__username">ShowList</span>
                 </button>
             </div>
         </div>
@@ -174,7 +177,7 @@
                 </div>
             </div>
         </div>
-        <div class="App__main-view">
+        <div class="App__main-view" id="user-background">
             <div class="App__top-gradient"></div>
             <div class="App__header-placeholder"></div>
             <section class="App__section App__quick-links">
@@ -203,6 +206,9 @@
                     <span>SEE ALL</span>
                 </div>
             </section>
+        </div>
+        <div class="admin-backround" id="list-user">
+
         </div>
     </div>
 </div>
@@ -279,10 +285,14 @@
     </div>
 </div>
 <!--Giao diện Admin Viêt ở đây -->
-<div class="admin-backround"></div>
+<!--<div class="admin-backround" id="list-user">-->
+
+<!--</div>-->
+
 <script src="../js/main.js"></script>
 <script src="../js/login.js"></script>
 <script src="../js/profile.js"></script>
-
+<script src="../js/music.js"></script>
+<script src="../js/admin.js"></script>
 </body>
 </html>
