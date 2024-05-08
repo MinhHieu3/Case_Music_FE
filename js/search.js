@@ -5,14 +5,13 @@ function openSearchBox() {
     background_user.style.display = 'none';
     backgroundSearch.style.display = 'block';
     background_create_playlist.style.display = 'none';
-
     dataSong1(url)
 }
 
 function searchSong1() {
     let search = document.getElementById('searchSong1').value;
     if (search !== null) {
-        dataSong1(`http://localhost:8080/api/songs?name=${search}`)
+        dataSong1(`http://localhost:8080/api/songs/search/v2?search=${search}`)
     }
 }
 
@@ -23,8 +22,9 @@ function dataSong1(url) {
                             <tr class="all-song-thead">
                                 <th></th>
                             <th>Name Song</th>
-                            <th>Name Singer</th>
+                            <th>Singer</th>
                             <th>Album</th>
+                             <th>Category</th>
                         
                             </tr>`;
         res.data.forEach((item, index) => {
@@ -33,6 +33,7 @@ function dataSong1(url) {
                                 <td>${item.name}</td>
                                 <td>${item.singer.name}</td>
                                 <td>${item.album.name}</td>
+                                <td>${item.category.name}</td>
                              
                             </tr>`
             localStorage.setItem('activeSongList', 'savedSongs');

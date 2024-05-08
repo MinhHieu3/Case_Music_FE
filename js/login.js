@@ -158,9 +158,7 @@ function userView() {
                     localStorage.setItem('listSongs', JSON.stringify(songs))
                     background_create_playlist.style.display="none";
                     backgroundSearch.style.display="none";
-                    choicePlaylist1.style.display = "none";
                     choicePlaylist2.style.display = "none";
-                    choicePlaylist3.style.display = "none";
                     background_user.style.display="block";
                     playlistSelected.style.display = "block";
 
@@ -243,9 +241,7 @@ document.getElementById("home-btn").addEventListener("click", function () {
     } else if (token !== null && role === 'ROLE_USER') {
         background_create_playlist.style.display="none";
         backgroundSearch.style.display="none";
-        choicePlaylist1.style.display = "block";
         choicePlaylist2.style.display = "block";
-        choicePlaylist3.style.display = "block";
         playlistSelected.style.display = "none"
         background_user.style.display = 'block';
     } else {

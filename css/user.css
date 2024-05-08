@@ -63,6 +63,9 @@
     position: relative;
     display: none;
 }
+.playlist-nav-bar:hover {
+  cursor: pointer;
+}
 
 .main-title {
     height: 3vh;
@@ -120,6 +123,8 @@
 .App__categories-nav {
     color: #c4c4c4;
     padding: 18px 12px;
+}.App__categories-nav:hover {
+    cursor: pointer;
 }
 
 .App__categories-nav > div:hover {
@@ -241,6 +246,7 @@
     background-color: #20D762;
     transition-duration: 0.3s;
     border: 1px solid white;
+    cursor: pointer;
 }
 
 .App__figure {
@@ -268,6 +274,9 @@
 
     display: flex;
     justify-content: center;
+}
+.App__username:hover {
+   cursor: pointer;
 }
 
 .App__expand-arrow {
@@ -862,7 +871,13 @@ button:hover {
 }
 .all-song-tbody{
     overflow: auto;
+
 }
+.all-song-tbody:hover{
+   cursor: pointer;
+
+}
+
 
 .display-song {
     width: 100%;
