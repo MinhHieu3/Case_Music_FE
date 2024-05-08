@@ -10,7 +10,6 @@ function ShowList() {
 function Songs(url) {
     axios.get(url).then(res => {
         const card = document.getElementById("card");
-
         card.innerHTML = '';
         res.data.forEach((item, index) => {
             const songDiv = document.createElement("div");
@@ -29,13 +28,9 @@ function Songs(url) {
                  playSong(index)
             });
             card.appendChild(songDiv);
+
         });
-        love.addEventListener('click', () => {
-            axios.get(`http://localhost:8080/api/songs/like/${item.id}`
-            ).then(res => {
-                updateLike(res.data.likes)
-            })
-        });
+
     });
 }
 
@@ -71,6 +66,12 @@ function playSong(indexSong) {
         console.log(res.data)
 
     })
+    love.addEventListener('click', () => {
+        axios.get(`http://localhost:8080/api/songs/likes/${song.id}`
+        ).then(res => {
+            updateLike(res.data.likes)
+        })
+    });
     document.getElementById("nextSong").addEventListener("click", function () {
         if (indexSong >= 0 && indexSong < currentSongs.length - 1) {
             playSong(indexSong + 1);
