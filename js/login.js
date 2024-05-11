@@ -2,6 +2,7 @@ let newBackground = document.getElementById("new-background");
 let homeUser = document.getElementById("home")
 let signup = document.getElementById("signup-background")
 let forUser1 = document.getElementById("for-user1")
+let createAlbum = document.getElementById("createAlbum")
 let loginNav = document.getElementById("login-nav")
 let profileNav = document.getElementById("profile-nav")
 let playlist = document.getElementById("playlist-nav-bar")
@@ -18,7 +19,7 @@ let choicePlaylist1 = document.getElementById("choice-playlist1")
 let choicePlaylist2 = document.getElementById("choice-playlist2")
 let choicePlaylist3 = document.getElementById("choice-playlist3")
 let playlistSelected = document.getElementById("playlist-selected")
-let homeBtn = document.getElementById("home-btn")
+let c = document.getElementById("home-btn")
 let authorBackground = document.getElementById("author-background")
 let itemDiv = ""
 window.onload = function () {
@@ -33,9 +34,6 @@ window.onload = function () {
     } else {
         greetingElement.textContent = 'Good evening!';
     }
-
-    console.log("load 1", currentId)
-
 }
 document.getElementById("myButton").addEventListener("click", function () {
     newBackground.style.display = "block";
@@ -63,9 +61,6 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
         localStorage.setItem('userToken', res.data.accessToken);
         localStorage.setItem('role', res.data.roles[0].authority);
         localStorage.setItem('currentId', res.data.id);
-        console.log(res.data)
-        console.log(res.data.accessToken)
-        console.log(res.data.roles[0].authority)
         loginUser()
         window.location.reload();
     })
@@ -85,14 +80,12 @@ document.getElementById("signupForm").addEventListener('submit',function ( event
         username : document.getElementById('usernameSignup').value,
         password : document.getElementById('passwordSignup').value,
         confirmPassword :document.getElementById('confirmPasswordSignup').value,
-        name : document.getElementById('nameSignup').value,
-        phone : document.getElementById('phoneSignup').value
+        name : document.getElementById('usernameSignup').value,
+        phone : 0
     }
     let idRoles = document.getElementById('select-role');
     let selectedOption = idRoles.options[idRoles.selectedIndex];
     let id = selectedOption.value;
-    console.log(id)
-    console.log(dataSignup)
         axios.post(`http://localhost:8080/register/${id}`,dataSignup).then(()=>{
             document.getElementById('new-background').style.display='block'
             document.getElementById('signup-background').style.display='none'
@@ -100,7 +93,6 @@ document.getElementById("signupForm").addEventListener('submit',function ( event
         })
         .catch(error => {
             if (error.response.data === "Username existed")
-            console.log(error)
            alert("Username existed")
             document.getElementById('usernameSignup').value = '';
             document.getElementById('passwordSignup').value = '';
@@ -130,7 +122,6 @@ function userView() {
             'Authorization': `Bearer ${token}`
         }
     }).then(res => {
-        console.log(currentId)
         const playlistList = document.getElementById("playlist-list");
         playlistList.innerHTML = '';
         res.data.forEach((item) => {
@@ -145,7 +136,6 @@ function userView() {
             itemDiv.appendChild(img);
             itemDiv.appendChild(name);
             playlistList.appendChild(itemDiv);
-
             itemDiv.addEventListener('click', function () {
                 const playlistId = this.getAttribute("data-id");
                 itemDiv.id = `play-list${playlistId}`;
@@ -159,6 +149,7 @@ function userView() {
                     background_create_playlist.style.display="none";
                     backgroundSearch.style.display="none";
                     choicePlaylist2.style.display = "none";
+                    createAlbum.style.display="none"
                     background_user.style.display="block";
                     playlistSelected.style.display = "block";
 
@@ -183,7 +174,6 @@ function userView() {
 <th>Listens</th>
 </tr>
 `
-
                     res.data.forEach((item, index) => {
                         console.log("test", item.song)
                         str += `
@@ -210,6 +200,7 @@ function userView() {
         newBackground.style.display = "none";
         homeUser.style.display = "block";
         forUser1.style.display = "flex"
+        createAlbum.style.display="none"
         home.style.opacity = "100%";
         loginNav.style.display = "none";
         profileNav.style.display = "flex";
@@ -234,13 +225,13 @@ document.getElementById("main-view").addEventListener("click", function () {
 });
 document.getElementById("home-btn").addEventListener("click", function () {
     if (token !== null && role === 'ROLE_ADMIN') {
-
         window.location.reload()
     } else if (token !== null && role === 'ROLE_AUTHOR') {
         showSongByAuthorId()
     } else if (token !== null && role === 'ROLE_USER') {
         background_create_playlist.style.display="none";
         backgroundSearch.style.display="none";
+        createAlbum.style.display="none"
         choicePlaylist2.style.display = "block";
         playlistSelected.style.display = "none"
         background_user.style.display = 'block';
@@ -251,6 +242,7 @@ document.getElementById("home-btn").addEventListener("click", function () {
 document.getElementById("logout").addEventListener("click", function () {
     localStorage.clear();
     window.location.reload();
+
 })
 
 function showListUser() {
@@ -258,6 +250,7 @@ function showListUser() {
     adminBox.style.display = "block";
     background_user.style.display = "none";
     forUser1.style.display = "none"
+    createAlbum.style.display="none"
     newBackground.style.display = "none";
     home.style.opacity = "100%";
     loginNav.style.display = "none";
@@ -270,7 +263,6 @@ function showListUser() {
         totalPages = Math.ceil(data.length / itemsPerPage);
         const startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = Math.min(startIndex + itemsPerPage, data.length);
-
         let str = `<table id="user-table-1">
                         <tr>
                             <th>Avatar</th>
@@ -281,7 +273,6 @@ function showListUser() {
                             <th>Role</th>
                             <th></th>
                         </tr>`;
-
         for (let i = startIndex; i < endIndex; i++) {
             let user = data[i];
             let enabledStatus = user.enabled ? `Active` : `Inactive`;
@@ -303,7 +294,6 @@ function showListUser() {
                     <button onclick="nextPage()">Next</button>
                     </div>`;
         }
-
         document.getElementById(`user-table`).innerHTML = str;
     }).catch(error => {
         console.error('Error fetching user data:', error);
@@ -337,3 +327,7 @@ function nextPage() {
         showListUser();
     }
 }
+document.getElementById("home-btn").addEventListener("click",function (){
+    background_author.style.display="block";
+    background_create_album.style.display="none";
+})

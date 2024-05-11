@@ -97,6 +97,7 @@ function playList() {
 function showSongByAuthorId() {
     background_user.style.display = "none"
     forUser1.style.display = "none"
+    createAlbum.style.display="display"
     newBackground.style.display = "none";
     loginNav.style.display = "none";
     profileNav.style.display = "flex";
