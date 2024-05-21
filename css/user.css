@@ -705,6 +705,7 @@
 }
 
 .song-name {
+    margin-top: 75px;
     transition: all 0.3s ease;
     cursor: pointer;
 }

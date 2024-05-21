@@ -70,11 +70,11 @@ function ShowAlbum(){
             const songDiv = document.createElement("div");
             songDiv.className = "App__section-grid-item";
             songDiv.innerHTML = `
-                <div style="height: 136px ;margin-bottom: 10px" ><img src="${item.avatar}" alt=""></div>
+                <div style="height: 136px ;width: 176px;margin-bottom: 20px"><img src="${item.avatar}" alt=""></div>
                 <div class="song-name">${item.name}</div>
                 <div><span>${item.listens}</span></div>
             `;
-            card.appendChild(songDiv); // Append the songDiv to the card
+            card.appendChild(songDiv);
         });
     }).catch(error => {
         console.error("There was an error fetching the album data:", error);

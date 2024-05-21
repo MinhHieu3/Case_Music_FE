@@ -130,7 +130,7 @@ function saveAlbum() {
     let name = document.getElementById('create_album').value;
     let img = '';
     if (imageURL == null) {
-        img = '../img/3427956.jpg';
+        img = "https://firebasestorage.googleapis.com/v0/b/test-91e51.appspot.com/o/music%2F4799iXrUwxXqto.jpg?alt=media&token=5d7fd1df-bb09-4dc4-bb03-0ff8a20e5cf4";
     } else {
         img = imageURL;
     }
@@ -139,9 +139,14 @@ function saveAlbum() {
         avatar: img,
         likes:0,
         listens:0,
+        user:
+            {
+                id:currentId
+            }
     }
     axios.post('http://localhost:8080/api/albums',data).then(res=>{
         console.log(res)
+        alert("Tạo Album Thành Công")
         idAlbum=res.data.id
     })
 }
