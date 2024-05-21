@@ -27,6 +27,7 @@
 
 </head>
 <body>
+<!--<input type="file" onchange="getImageData(event)">-->
 <!--Viêt giao diện Urer-->
 <div class="originnal-backround" id="home">
 
@@ -88,9 +89,7 @@
                     </div>
                     <span>Create Playlist</span>
                 </div>
-
-
-                <div class="App__category-item album" id="createAlbum" onclick="createAlbums()"  >
+                <div class="App__category-item album" id="createAlbum" onclick="createAlbums()">
                     <div class="iconb">
                         <svg role="img" height="12" width="12" aria-hidden="true" viewBox="0 0 16 16" fill="#c4c4c4">
                             <path d="M14 7H9V2H7v5H2v2h5v5h2V9h5z"></path>
@@ -112,6 +111,17 @@
                     <div class="item-list">
                         <p class="name-item" id="name-item"></p>
                         <p class="name-playList" id="name-playList"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="playlist-nav-bar" id="album-nav-bar">
+                <div class="main-title">
+                    <h3>Your Album:</h3>
+                </div>
+                <div class="playlist-list" id="album-list">
+                    <div class="item-list">
+                        <p class="name-item" id="album-item"></p>
+                        <p class="name-playList" id="album-playList"></p>
                     </div>
                 </div>
             </div>
@@ -172,6 +182,7 @@
         </div>
         <div class="App__main-view" id="main-view">
             <div id="back-user">
+                <div class="App__top-gradient"></div>
                 <div class="App__header-placeholder"></div>
                 <section class="App__section App__your-shows" id="choice-playlist2">
                     <div class="App__section-header">
@@ -179,23 +190,12 @@
                     </div>
                     <div class="App__section-grid-container" id="card"></div>
                 </section>
-
-                <section class="App__section App__your-shows" id="choice-new">
-                    <div class="App__section-header">
-                        <h3>New Song</h3>
-                    </div>
-                    <div class="App__section-grid-container" id="card-new"></div>
-                </section>
-                <section class="App__section App__your-shows" id="choice-album">
-                    <div class="App__section-header">
-                        <h3>List Album</h3>
-                    </div>
-                    <div class="App__section-grid-container" id="card-album"></div>
-                </section>
+                <div id="playlist-selected">
+                </div>
             </div>
             <!--            giao diện tìm kiếm bài hát-->
             <div class="background-search-songs" id="background-search" style="display: none">
-                <div class="background-show-song"  >
+                <div class="background-show-song">
                     <div class="search-song">
                         <label><input type="text" id="searchSong1" placeholder="Tìm kiếm bài hát..."
                                       oninput="searchSong1()"></label>
@@ -208,12 +208,13 @@
                 <div class="background-create-song">
                     <div class="iconAvatar">
                         <div class="box_avatar" onclick="changePlaylist()">
-                            <img src="../img/3427956.jpg" height="1080" width="1000" id="img_playlist" />
-                            <input type="file" id="fileInput" onchange="getImageData(event)" style="display: none" />
+                            <img src="../img/3427956.jpg" height="1080" width="1000" id="img_playlist"/>
+                            <input type="file" id="fileInput" onchange="getImageData(event)" style="display: none"/>
                         </div>
                     </div>
                     <div class="iconCreate">
-                        <label>Create PlayList<input id='create_playlist' type="text" placeholder="Name PlayList" onchange="savePalaylist()"></label>
+                        <label>Create PlayList<input id='create_playlist' type="text" placeholder="Name PlayList"
+                                                     onchange="savePalaylist()"></label>
                     </div>
                 </div>
                 <div class="background-show-song">
@@ -226,27 +227,24 @@
                     </div>
                 </div>
             </div>
-<!--            Giao diện creat album-->
+            <!--            Giao diện creat album-->
             <div id="background-create-album" style="display: none">
                 <div class="background-create-song">
                     <div class="iconAvatar">
-                        <div class="box_avatar" onclick="changeAlbum()">
-                            <img src="../img/3427956.jpg" height="1080" width="1000" id="img_album" />
-                            <input type="file" id="fileInputAlbum" onchange="getImageData(event)" style="display: none" />
+                        <div class="box_avatar" onclick="changeAlbum()"><img src="../img/3427956.jpg" height="1080"
+                                                                             width="1000" id="img_album"/> <input
+                                type="file" id="fileInputAlbum" onchange="getImageData(event)" style="display: none"/>
                         </div>
                     </div>
-                    <div class="iconCreate">
-                        <label>Create Album<input id='create_album' type="text" placeholder="Name Album" onchange="saveAlbum()"></label>
-                    </div>
+                    <div class="iconCreate"><label>Create Album<input id='create_album' type="text"
+                                                                      placeholder="Name Album"
+                                                                      onchange="saveAlbum()"></label></div>
                 </div>
                 <div class="background-show-song">
-                    <div class="search-song">
-                        <label><input type="text" id="searchSongs" placeholder="Tìm kiếm bài hát..."
-                                      oninput="searchSongInAlbum()"></label>
-                    </div>
-                    <div class="display-song" id="shows">
-
-                    </div>
+                    <div class="search-song"><label><input type="text" id="searchSongs"
+                                                           placeholder="Tìm kiếm bài hát..."
+                                                           oninput="searchSongInAlbum()"></label></div>
+                    <div class="display-song" id="shows"></div>
                 </div>
             </div>
             <!--            Giao diện Admin-->

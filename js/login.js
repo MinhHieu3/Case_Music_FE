@@ -6,6 +6,7 @@ let createAlbum = document.getElementById("createAlbum")
 let loginNav = document.getElementById("login-nav")
 let profileNav = document.getElementById("profile-nav")
 let playlist = document.getElementById("playlist-nav-bar")
+let album = document.getElementById("album-nav-bar")
 let adminBox = document.getElementById("admin-background")
 let background_user = document.getElementById("back-user")
 let playingBar = document.getElementById("playing-bar")
@@ -144,6 +145,7 @@ function userView() {
                         'Authorization': `Bearer ${token}`
                     }
                 }).then(res => {
+                    console.log(res.data)
                     const songs = res.data.map(item => item.song);
                     localStorage.setItem('listSongs', JSON.stringify(songs))
                     background_create_playlist.style.display="none";
@@ -168,11 +170,10 @@ function userView() {
 <div class="bot">
 <table id="playlist-selected-table">
 <tr>
-<th>Name Song</th>
+<th>Song name</th>
 <th>Album</th>
 <th>Likes</th>
 <th>Listens</th>
-<th></th>
 </tr>
 `
                     res.data.forEach((item, index) => {
@@ -183,7 +184,6 @@ function userView() {
 <td>${item.song.album.name}</td>
 <td>${item.song.likes}</td>
 <td>${item.song.listens}</td>
-<td style="cursor: pointer" onclick="deleteSong(${item.song.id})">X</td>
 </tr>
 `
                     })
@@ -209,7 +209,6 @@ function userView() {
         playlist.style.display = "flex"
     })
 }
-
 function deleteSong(id) {
     console.log(id);
     axios.delete(`http://localhost:8080/api/song-playlist/` + id)

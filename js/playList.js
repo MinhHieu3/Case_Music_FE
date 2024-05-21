@@ -147,6 +147,7 @@ function saveAlbum() {
     axios.post('http://localhost:8080/api/albums',data).then(res=>{
         console.log(res)
         alert("Tạo Album Thành Công")
+        Album()
         idAlbum=res.data.id
     })
 }

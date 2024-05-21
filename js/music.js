@@ -142,6 +142,9 @@ function playList() {
 }
 
 function showSongByAuthorId() {
+    album.style.display="block"
+    Album()
+
     background_user.style.display = "none"
     forUser1.style.display = "none"
     document.getElementById("createAlbum").style.display="block"
@@ -320,5 +323,30 @@ function addSong() {
     }
     axios.post(`http://localhost:8080/api/songs`, data).then(() => {
         showSongByAuthorId()
+    })
+}
+
+function Album() {
+    axios.get('http://localhost:8080/api/albums/' + currentId, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    }).then(res => {
+        const playlistList = document.getElementById("album-list");
+        playlistList.innerHTML = '';
+        res.data.forEach((item) => {
+            itemDiv = document.createElement("div");
+            itemDiv.setAttribute("data-id", item.id);
+            const img = document.createElement("img");
+            img.setAttribute("src", item.avatar);
+            img.setAttribute("alt", "Playlist image");
+            const name = document.createElement("p");
+            name.classList.add("name-item");
+            name.textContent = item.name;
+            itemDiv.appendChild(img);
+            itemDiv.appendChild(name);
+            playlistList.appendChild(itemDiv);
+        })
+
     })
 }
