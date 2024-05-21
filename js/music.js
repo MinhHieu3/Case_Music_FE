@@ -1,14 +1,15 @@
 const song = JSON.parse(localStorage.getItem('indexSong'))
 const savedSongs = JSON.parse(localStorage.getItem('songs'))
 const idSongs = JSON.parse(localStorage.getItem('idSong'))
-Songs('http://localhost:8080/api/songs/top')
-
+Songs()
+TopNew()
+ShowAlbum()
 function ShowList() {
     Songs('http://localhost:8080/api/songs')
 }
 
-function Songs(url) {
-    axios.get(url).then(res => {
+function Songs() {
+    axios.get('http://localhost:8080/api/songs/top').then(res => {
         const card = document.getElementById("card");
         card.innerHTML = '';
         res.data.forEach((item, index) => {
@@ -31,6 +32,52 @@ function Songs(url) {
 
         });
 
+    });
+}
+function TopNew(){
+    axios.get(`http://localhost:8080/api/songs/top5-new-song`).then(res => {
+        const card = document.getElementById("card-new");
+        card.innerHTML = '';
+        res.data.forEach((item, index) => {
+            const songDiv = document.createElement("div");
+            songDiv.className = "App__section-grid-item";
+            songDiv.innerHTML = `
+            <div style="height: 136px ;margin-bottom: 10px" ><img src="${item.album.avatar}" alt=""></div>
+            <div class="song-name" >${item.name}</div>
+            <div><span>${item.singer.name}</span></div>
+            <div><span>${item.category.name}</span></div>
+        `;
+            songDiv.querySelector('.song-name').addEventListener('click', function () {
+                localStorage.setItem('activeSongList', 'savedSongs');
+                localStorage.setItem('songs', JSON.stringify(res.data));
+                localStorage.setItem('activeSongList', 'savedSongs');
+                localStorage.setItem('idSong', JSON.stringify(`${item.id}`))
+                playSong(index)
+            });
+            card.appendChild(songDiv);
+
+        });
+
+    });
+}
+
+function ShowAlbum(){
+    axios.get(`http://localhost:8080/api/albums/top-by-listens`).then(res => {
+        console.log(res.data);
+        const card = document.getElementById("card-album");
+        card.innerHTML = '';
+        res.data.forEach((item, index) => {
+            const songDiv = document.createElement("div");
+            songDiv.className = "App__section-grid-item";
+            songDiv.innerHTML = `
+                <div style="height: 136px ;margin-bottom: 10px" ><img src="${item.avatar}" alt=""></div>
+                <div class="song-name">${item.name}</div>
+                <div><span>${item.listens}</span></div>
+            `;
+            card.appendChild(songDiv); // Append the songDiv to the card
+        });
+    }).catch(error => {
+        console.error("There was an error fetching the album data:", error);
     });
 }
 
@@ -97,7 +144,7 @@ function playList() {
 function showSongByAuthorId() {
     background_user.style.display = "none"
     forUser1.style.display = "none"
-    createAlbum.style.display="display"
+    document.getElementById("createAlbum").style.display="block"
     newBackground.style.display = "none";
     loginNav.style.display = "none";
     profileNav.style.display = "flex";

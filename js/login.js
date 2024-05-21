@@ -168,10 +168,11 @@ function userView() {
 <div class="bot">
 <table id="playlist-selected-table">
 <tr>
-<th>Song name</th>
+<th>Name Song</th>
 <th>Album</th>
 <th>Likes</th>
 <th>Listens</th>
+<th></th>
 </tr>
 `
                     res.data.forEach((item, index) => {
@@ -182,6 +183,7 @@ function userView() {
 <td>${item.song.album.name}</td>
 <td>${item.song.likes}</td>
 <td>${item.song.listens}</td>
+<td style="cursor: pointer" onclick="deleteSong(${item.song.id})">X</td>
 </tr>
 `
                     })
@@ -208,6 +210,16 @@ function userView() {
     })
 }
 
+function deleteSong(id) {
+    console.log(id);
+    axios.delete(`http://localhost:8080/api/song-playlist/` + id)
+        .then(() => {
+            alert('Song has been deleted from the playlist');
+        })
+        .catch(error => {
+            console.error('There was an error deleting the song:', error);
+        });
+}
 document.getElementById("xLogin-btn").addEventListener("click", function () {
     newBackground.style.display = "none";
     home.style.opacity = "100%";
@@ -228,13 +240,18 @@ document.getElementById("home-btn").addEventListener("click", function () {
         window.location.reload()
     } else if (token !== null && role === 'ROLE_AUTHOR') {
         showSongByAuthorId()
+        background_author.style.display="block";
+        background_create_album.style.display="none";
     } else if (token !== null && role === 'ROLE_USER') {
         background_create_playlist.style.display="none";
         backgroundSearch.style.display="none";
         createAlbum.style.display="none"
+        authorBackground.style.display = "none"
         choicePlaylist2.style.display = "block";
         playlistSelected.style.display = "none"
         background_user.style.display = 'block';
+        background_author.style.display="none";
+        background_create_album.style.display="none";
     } else {
         window.location.reload()
     }
@@ -249,6 +266,7 @@ function showListUser() {
     profileNav.style.display = "flex";
     adminBox.style.display = "block";
     background_user.style.display = "none";
+    authorBackground.style.display = "block"
     forUser1.style.display = "none"
     createAlbum.style.display="none"
     newBackground.style.display = "none";
@@ -327,7 +345,3 @@ function nextPage() {
         showListUser();
     }
 }
-document.getElementById("home-btn").addEventListener("click",function (){
-    background_author.style.display="block";
-    background_create_album.style.display="none";
-})
